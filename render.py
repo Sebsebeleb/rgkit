@@ -74,7 +74,7 @@ class Render:
         next_button.pack(side='left')
         restart_button = Tkinter.Button(frame, text='<<', command=restart)
         restart_button.pack(side='left')
-        self._time_slider = Tkinter.Scale(frame, from_=-50, to_=50, orient=Tkinter.HORIZONTAL)
+        self._time_slider = Tkinter.Scale(frame, from_=-50, to_=50, orient=Tkinter.HORIZONTAL, borderwidth=0)
         self._time_slider.pack()
 
     def prepare_backdrop(self, win):
@@ -121,10 +121,9 @@ class Render:
 
     def callback(self):
         v = self._time_slider.get()
-        if v < 0:
-            v = v
-        else:
-            v = v * 10
+        v = -v
+        if v > 0:
+            v = v * 20
         delay = self._settings.turn_interval + v
         if not self._paused:
             self.change_turn(1)
